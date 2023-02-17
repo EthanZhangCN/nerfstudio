@@ -3,11 +3,16 @@
 Default test to make sure train runs
 """
 
+
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pytest
+
+sys.path.append(".")
+import pdb
 
 from nerfstudio.configs.method_configs import method_configs
 from nerfstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
@@ -18,7 +23,7 @@ from scripts.train import train_loop
 BLACKLIST = [
     "base",
     "semantic-nerfw",
-    "instant-ngp",
+    # "instant-ngp",
     "instant-ngp-bounded",
     "nerfacto",
     "phototourism",
@@ -60,6 +65,7 @@ def set_reduced_config(config: TrainerConfig):
 def test_train():
     """test run train script works properly"""
     all_config_names = method_configs.keys()
+    # pdb.set_trace()
     for config_name in all_config_names:
         if config_name in BLACKLIST:
             print("skipping", config_name)
